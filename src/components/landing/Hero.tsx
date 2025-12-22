@@ -1,22 +1,116 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect } from "react";
+import { motion, useMotionValue, useSpring, AnimatePresence, Variants } from "framer-motion";
+import { useEffect, useState, Suspense, useRef } from "react";
+
+// Slide data with content and background images
+const slides = [
+  {
+    id: 1,
+    title: "Welcome to EvaSUE",
+    subtitle: "Ethiopian Students Union in Ethiopia",
+    background: "/images/bg-5.jpg",
+    badgeText: "ADVANCING THE KINGDOM OF GOD",
+    gradient: "from-red-500/20 via-sky-500/20 to-purple-500/20",
+  },
+  {
+    id: 2,
+    title: "Student Today",
+    subtitle: "Leaders Tomorrow",
+    background: "/images/bg1.jpg",
+    badgeText: "SHAPING FUTURE LEADERS",
+    gradient: "from-blue-500/20 via-emerald-500/20 to-cyan-500/20",
+  },
+  {
+    id: 3,
+    title: "A Wide Network",
+    subtitle: "Christian Students & Graduates of Ethiopia",
+    background: "/images/bg2.JPG",
+    badgeText: "UNITED IN CHRIST",
+    gradient: "from-purple-500/20 via-pink-500/20 to-rose-500/20",
+  },
+  {
+    id: 4,
+    title: "Since the 1950s",
+    subtitle: "Student Movement Making History",
+    background: "/images/bg3.JPG",
+    badgeText: "LEGACY OF FAITH",
+    gradient: "from-amber-500/20 via-orange-500/20 to-yellow-500/20",
+  },
+  {
+    id: 5,
+    title: "Making and Multiplying",
+    subtitle: "Disciples on Every Campus",
+    background: "/images/small.JPG",
+    badgeText: "DISCIPLESHIP MOVEMENT",
+    gradient: "from-green-500/20 via-teal-500/20 to-emerald-500/20",
+  },
+];
+
+// Pre-calculate random values to avoid calling Math.random during render
+const PARTICLE_DATA = Array.from({ length: 20 }).map((_, i) => ({
+  id: i,
+  left: `${(i * 5) % 100}%`,
+  top: `${(i * 7) % 100}%`,
+  rotation: (i * 18) % 360,
+  duration: 3 + (i % 3),
+  delay: i % 5,
+}));
+
+const LINE_DATA = Array.from({ length: 15 }).map((_, i) => ({
+  id: i,
+  length: 5 + (i % 3),
+  speed: 0.5 + (i % 2),
+  position: [
+    ((i * 13) % 100 - 50) * 0.4,
+    ((i * 17) % 100 - 50) * 0.4,
+    ((i * 11) % 100 - 50) * 0.2,
+  ],
+  rotation: [i * 0.6, i * 0.4, 0],
+}));
+
+const SHAPE_DATA = [
+  { type: 'box', size: [0.5, 0.5, 0.5] as [number, number, number], speed: 1.2 },
+  { type: 'sphere', size: [0.3, 32, 32] as [number, number, number], speed: 1.5 },
+  { type: 'cone', size: [0.3, 0.6, 8] as [number, number, number], speed: 1.8 },
+  { type: 'torus', size: [0.3, 0.1, 16, 32] as [number, number, number, number], speed: 1.3 },
+  { type: 'octahedron', size: [0.4, 0] as [number, number], speed: 1.6 },
+];
 
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  
   // Smooth mouse position tracking for parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   
-  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 30 });
-  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 30 });
+  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 20 });
 
+  // Auto slide effect with smooth transitions
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setDirection(1);
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+        setTimeout(() => setIsTransitioning(false), 500);
+      }, 300);
+    }, 7000); // 7 seconds total with transition delays
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Mouse tracking effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      if (isTransitioning) return;
+      
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 15;
       
       mouseX.set(x);
       mouseY.set(y);
@@ -24,412 +118,518 @@ export default function Hero() {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isTransitioning]);
+
+  // Enhanced slide animation variants
+  const backgroundVariants: Variants = {
+    enter: {
+      opacity: 0,
+      scale: 1.1,
+      filter: "blur(10px)",
+    },
+    center: {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        opacity: { duration: 2, ease: "easeOut" },
+        scale: { duration: 3, ease: "easeOut" },
+        filter: { duration: 2, ease: "easeOut" },
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      filter: "blur(5px)",
+      transition: {
+        opacity: { duration: 1.5, ease: "easeIn" },
+        scale: { duration: 2, ease: "easeIn" },
+        filter: { duration: 1.5, ease: "easeIn" },
+      }
+    }
+  };
+
+  const contentVariants: Variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 100 : -100,
+      y: 20,
+      opacity: 0,
+      rotateY: direction > 0 ? 10 : -10,
+    }),
+    center: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      rotateY: 0,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut",
+      }
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -100 : 100,
+      y: -20,
+      opacity: 0,
+      rotateY: direction > 0 ? -10 : 10,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+      }
+    })
+  };
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-sky-950 via-sky-900 to-sky-950">
       
-      {/* Enhanced Animated Background */}
+      {/* 3D Canvas for Floating Lines and Shapes - Removed for simplicity */}
+      {/* You can re-enable this later when you've installed and configured @react-three/fiber properly */}
+      
+      {/* Background Images with Enhanced Slow Transitions */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Main image with parallax */}
-        <motion.div
-          style={{
-            x: smoothX,
-            y: smoothY,
-          }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="/images/bg-5.jpg"
-            alt="Hero Background"
-            fill
-            className="object-cover opacity-60"
-            priority
-            quality={90}
-          />
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={slides[currentSlide].id}
+            variants={backgroundVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            style={{
+              x: smoothX,
+              y: smoothY,
+            }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={slides[currentSlide].background}
+              alt="Hero Background"
+              fill
+              className="object-cover"
+              priority
+              quality={100}
+              sizes="100vw"
+            />
+            {/* Dynamic gradient overlay based on slide */}
+            <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].gradient}`} />
+          </motion.div>
+        </AnimatePresence>
         
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-900/80 via-sky-800/70 to-sky-900/80" />
-        <div className="absolute inset-0 bg-gradient-to-t from-sky-950/70 via-transparent to-transparent" />
+        {/* Static gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-900/90 via-sky-800/80 to-sky-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-sky-950/80 via-transparent to-transparent" />
         
-        {/* Enhanced floating animated elements */}
+        {/* Enhanced floating lines (2D) */}
         <div className="absolute inset-0">
-          {/* Large floating orbs */}
-          {[1, 2, 3, 4].map((i) => (
+          {/* Vertical Lines */}
+          {[1, 2, 3, 4, 5].map((i) => (
             <motion.div
-              key={i}
-              className={`absolute rounded-full blur-2xl ${
-                i % 3 === 0 
-                  ? 'bg-gradient-to-br from-red-500/15 to-transparent' 
-                  : i % 2 === 0
-                  ? 'bg-gradient-to-br from-sky-400/15 to-transparent'
-                  : 'bg-gradient-to-br from-white/10 to-transparent'
-              }`}
+              key={`vertical-${i}`}
+              className="absolute top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/30 to-transparent"
               style={{
-                width: `${80 + i * 30}px`,
-                height: `${80 + i * 30}px`,
-                left: `${5 + i * 20}%`,
-                top: `${10 + i * 15}%`,
+                left: `${10 + i * 15}%`,
               }}
               animate={{
-                y: [0, -40, 0],
-                x: [0, i % 2 === 0 ? 25 : -25, 0],
-                rotate: [0, 180, 360],
-                scale: [1, 1.2, 1],
+                height: ["0%", "100%", "0%"],
+                opacity: [0, 0.5, 0],
               }}
               transition={{
-                duration: 8 + i * 2,
+                duration: 8 + i * 0.5,
                 repeat: Infinity,
                 ease: "easeInOut",
+                delay: i * 0.3,
               }}
             />
           ))}
           
-          {/* Small floating dots */}
-          {[1, 2, 3, 4, 5, 6].map((i) => (
+          {/* Horizontal Lines */}
+          {[1, 2, 3, 4].map((i) => (
             <motion.div
-              key={`dot-${i}`}
-              className="absolute w-2 h-2 rounded-full bg-white/30"
+              key={`horizontal-${i}`}
+              className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
               style={{
-                left: `${10 + i * 15}%`,
-                top: `${20 + i * 10}%`,
+                top: `${20 + i * 15}%`,
               }}
               animate={{
-                y: [0, -30, 0],
-                x: [0, 20, 0],
-                opacity: [0.3, 1, 0.3],
+                width: ["0%", "100%", "0%"],
+                opacity: [0, 0.4, 0],
               }}
               transition={{
-                duration: 5 + i,
+                duration: 6 + i * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+          
+          {/* Diagonal Lines */}
+          {[1, 2, 3].map((i) => (
+            <motion.div
+              key={`diagonal-${i}`}
+              className="absolute w-64 h-px bg-gradient-to-r from-transparent via-sky-400/30 to-transparent"
+              style={{
+                left: `${i * 20}%`,
+                top: `${i * 15}%`,
+                transform: `rotate(${45 + i * 15}deg)`,
+              }}
+              animate={{
+                opacity: [0, 0.3, 0],
+                width: ["0px", "300px", "0px"],
+              }}
+              transition={{
+                duration: 10 + i * 2,
                 repeat: Infinity,
                 ease: "easeInOut",
                 delay: i * 0.5,
               }}
             />
           ))}
-          
-          {/* Wavy lines background */}
-          <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 1000 1000">
-            <defs>
-              <path
-                id="wave"
-                d="M 0,500 Q 250,400 500,500 T 1000,500"
-                stroke="white"
-                fill="transparent"
-                strokeWidth="2"
-              />
-            </defs>
-            <use href="#wave" x="0" y="0" />
-            <use href="#wave" x="0" y="100" />
-            <use href="#wave" x="0" y="200" />
-          </svg>
         </div>
 
-        {/* Particle effects */}
+        {/* Geometric Shapes */}
         <div className="absolute inset-0">
-          {Array.from({ length: 15 }).map((_, i) => (
+          {/* Rotating Triangles */}
+          {[1, 2, 3].map((i) => (
             <motion.div
-              key={`particle-${i}`}
-              className="absolute w-[1px] h-[1px] bg-white/50 rounded-full"
+              key={`triangle-${i}`}
+              className="absolute w-16 h-16"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${15 + i * 25}%`,
+                top: `${70 + i * 5}%`,
               }}
               animate={{
-                opacity: [0, 0.8, 0],
-                scale: [0, 2, 0],
+                rotate: 360,
+                scale: [1, 1.2, 1],
               }}
               transition={{
-                duration: 2 + Math.random() * 3,
+                rotate: {
+                  duration: 20 + i * 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                },
+                scale: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+              }}
+            >
+              <div className="w-full h-full border-t-2 border-r-2 border-white/20 transform rotate-45" />
+            </motion.div>
+          ))}
+          
+          {/* Pulsing Circles */}
+          {[1, 2, 3, 4].map((i) => (
+            <motion.div
+              key={`pulse-${i}`}
+              className="absolute rounded-full border border-white/10"
+              style={{
+                width: `${40 + i * 20}px`,
+                height: `${40 + i * 20}px`,
+                left: `${80 - i * 10}%`,
+                top: `${10 + i * 15}%`,
+              }}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 0.1, 0.3],
+              }}
+              transition={{
+                duration: 4 + i,
                 repeat: Infinity,
-                delay: Math.random() * 3,
+                ease: "easeInOut",
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Particle effects with lines - using pre-calculated data */}
+        <div className="absolute inset-0">
+          {PARTICLE_DATA.map((particle) => (
+            <motion.div
+              key={`particle-${particle.id}`}
+              className="absolute w-px h-4 bg-gradient-to-b from-transparent via-white/40 to-transparent"
+              style={{
+                left: particle.left,
+                top: particle.top,
+                transform: `rotate(${particle.rotation}deg)`,
+              }}
+              animate={{
+                y: [0, -40, 0],
+                opacity: [0, 0.8, 0],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: particle.duration,
+                repeat: Infinity,
+                delay: particle.delay,
+                ease: "easeInOut",
               }}
             />
           ))}
         </div>
         
-        {/* Animated gradient lights */}
+        {/* Dynamic gradient lights based on current slide */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-red-500/5 to-sky-500/5 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-gradient-to-r from-sky-500/5 to-white/5 rounded-full blur-3xl"
+          className={`absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r ${slides[currentSlide].gradient} rounded-full blur-3xl`}
           animate={{
             scale: [1, 1.4, 1],
             opacity: [0.2, 0.4, 0.2],
+            rotate: [0, 180, 360],
           }}
           transition={{
-            duration: 5,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1,
+            rotate: {
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            },
           }}
         />
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Main Content with Enhanced Transitions */}
+      <div className="relative z-30 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center space-y-10 md:space-y-12 pt-16">
           
-          {/* Spacer to move content down a bit */}
           <div className="h-8 md:h-12" />
           
-          {/* Animated Badge - Moved down */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-4"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 shadow-lg">
-              <motion.div
-                className="w-2 h-2 bg-orange-400 rounded-full"
-                animate={{ scale: [1, 1.4, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <span className="text-sm font-medium text-white tracking-wider">
-                ADVANCING KINGDOM OF GOD
-              </span>
-            </div>
-          </motion.div>
+          {/* Animated Badge */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`badge-${slides[currentSlide].id}`}
+              custom={direction}
+              variants={contentVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="mb-4"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-lg rounded-full border border-white/20 shadow-2xl">
+                <motion.div
+                  className="w-2 h-2 rounded-full"
+                  animate={{
+                    scale: [1, 1.6, 1],
+                    backgroundColor: ["#f97316", "#3b82f6", "#f97316"],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <span className="text-sm font-semibold text-white tracking-wider">
+                  {slides[currentSlide].badgeText}
+                </span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
           {/* Main Headline */}
-          <div className="space-y-6">
-            <motion.h1
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight"
-            >
-              <div className="space-y-4">
-                <div className="flex flex-wrap justify-center gap-x-3 gap-y-2">
-                  <motion.span
-                    className="bg-gradient-to-r from-white to-sky-100 bg-clip-text text-transparent"
-                    initial={{ opacity: 0, y: 20 }}
+          <div className="space-y-8">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={`title-${slides[currentSlide].id}`}
+                custom={direction}
+                variants={contentVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.1] tracking-tight"
+              >
+                <div className="space-y-6">
+                  <motion.div
+                    className="flex flex-wrap justify-center gap-x-4 gap-y-3"
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
+                    transition={{ delay: 0.3, duration: 1 }}
                   >
-                    Longing for
-                  </motion.span>
-                </div>
-                <div className="flex flex-wrap justify-center gap-x-3 gap-y-2">
-                  <motion.span
-                    className="text-red-500"
+                    <span className="bg-gradient-to-r from-white via-sky-100 to-white bg-clip-text text-transparent animate-gradient">
+                      {slides[currentSlide].title}
+                    </span>
+                  </motion.div>
+                  <motion.div
+                    className="flex flex-wrap justify-center gap-x-4 gap-y-3"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.7 }}
+                    transition={{ delay: 0.6, duration: 1 }}
                   >
-                    Revival
-                  </motion.span>
-                  <span className="text-white">on</span>
-                  <motion.span
-                    className="text-red-500"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
-                  >
-                    Every
-                  </motion.span>
-                  <motion.span
-                    className="text-white"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.9 }}
-                  >
-                    Campus
-                  </motion.span>
+                    <span className="text-white/90 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-wide">
+                      {slides[currentSlide].subtitle}
+                    </span>
+                  </motion.div>
                 </div>
-              </div>
-            </motion.h1>
+              </motion.h1>
+            </AnimatePresence>
 
-            {/* Animated underline */}
+            {/* Dynamic underline that changes color */}
             <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "200px" }}
-              transition={{ delay: 1.1, duration: 1 }}
-              className="h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto"
+              key={`underline-${slides[currentSlide].id}`}
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ 
+                width: "300px",
+                opacity: 1,
+              }}
+              transition={{ delay: 1, duration: 1.5, ease: "easeOut" }}
+              className="h-1 mx-auto rounded-full bg-gradient-to-r from-transparent via-current to-transparent"
+              style={{
+                color: slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'red' ? '#ef4444' :
+                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'blue' ? '#3b82f6' :
+                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'purple' ? '#8b5cf6' :
+                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'amber' ? '#f59e0b' :
+                       '#10b981',
+              }}
             />
           </div>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.3 }}
-            className="text-lg sm:text-xl text-white/90 max-w-2xl leading-relaxed px-4"
-          >
-            Empowering students to follow Jesus with their whole lives, 
-            for the rest of their lives.
-          </motion.p>
-
-          {/* CTA Buttons */}
+          {/* Stats with floating animation */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.5 }}
-            className="flex flex-col sm:flex-row gap-4 pt-4"
-          >
-            {/* Primary Button */}
-            <Link
-              href="/chapters"
-              className="group relative"
-            >
-              <motion.div
-                className="relative px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-full font-semibold shadow-lg"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {/* Background shine on hover */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
-                
-                {/* Button content */}
-                <div className="relative z-10 flex items-center justify-center gap-2">
-                  <motion.div
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
-                    </svg>
-                  </motion.div>
-                  <span className="text-sm sm:text-base">Join Community</span>
-                </div>
-                
-                {/* Hover shine effect */}
-                <div className="absolute inset-0 overflow-hidden rounded-full">
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.6 }}
-                  />
-                </div>
-              </motion.div>
-            </Link>
-
-            {/* Secondary Button */}
-            <Link
-              href="/about-us"
-              className="group relative"
-            >
-              <motion.div
-                className="relative px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full font-semibold shadow-lg"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {/* Hover background */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
-                
-                {/* Button content */}
-                <div className="relative z-10 flex items-center justify-center gap-2">
-                  <motion.svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                  >
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </motion.svg>
-                  <span className="text-sm sm:text-base">Learn More</span>
-                </div>
-                
-                {/* Subtle glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
-              </motion.div>
-            </Link>
-          </motion.div>
-
-          {/* Stats - Clean and Modern */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.8 }}
-            className="grid grid-cols-3 gap-6 sm:gap-8 pt-8"
+            transition={{ delay: 1.5, duration: 1 }}
+            className="grid grid-cols-3 gap-6 sm:gap-8 pt-12"
           >
             {[
-              { value: "150+", label: "Campuses", color: "text-white" },
+              { value: "180+", label: "Campuses", color: "text-white" },
               { value: "50,000+", label: "Students", color: "text-white" },
-              { value: "50+", label: "Years", color: "text-white" },
+              { value: "60+", label: "Years", color: "text-white" },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2 + index * 0.1 }}
-                className="text-center"
+                transition={{ delay: 1.8 + index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/5 shadow-xl"
               >
-                <div className={`text-2xl sm:text-3xl font-bold ${stat.color} mb-1`}>
+                <div className={`text-3xl sm:text-4xl md:text-5xl font-bold ${stat.color} mb-2`}>
                   {stat.value}
                 </div>
-                <div className="text-xs sm:text-sm text-white/60 uppercase tracking-wider">
+                <div className="text-sm sm:text-base text-white/70 uppercase tracking-widest font-light">
                   {stat.label}
                 </div>
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Enhanced Slide Navigation */}
+          <div className="flex flex-col items-center gap-6 mt-12">
+            {/* Slide Dots with Preview */}
+            <div className="flex items-center justify-center gap-4">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.id}
+                  onClick={() => {
+                    if (isTransitioning) return;
+                    setIsTransitioning(true);
+                    setDirection(index > currentSlide ? 1 : -1);
+                    setTimeout(() => {
+                      setCurrentSlide(index);
+                      setTimeout(() => setIsTransitioning(false), 500);
+                    }, 300);
+                  }}
+                  className="relative group"
+                  disabled={isTransitioning}
+                >
+                  <motion.div
+                    className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                      index === currentSlide
+                        ? 'bg-white scale-125'
+                        : 'bg-white/40 hover:bg-white/60'
+                    }`}
+                    whileHover={{ scale: 1.3 }}
+                    whileTap={{ scale: 0.9 }}
+                  />
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="bg-black/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                      {slide.title}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Enhanced Progress Bar */}
+            <div className="w-full max-w-md mx-auto">
+              <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                <motion.div
+                  className="absolute h-full rounded-full"
+                  style={{
+                    background: `linear-gradient(90deg, ${slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'red' ? '#ef4444' :
+                      slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'blue' ? '#3b82f6' :
+                      slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'purple' ? '#8b5cf6' :
+                      slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'amber' ? '#f59e0b' :
+                      '#10b981'}, ${slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'red' ? '#f87171' :
+                      slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'blue' ? '#60a5fa' :
+                      slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'purple' ? '#a78bfa' :
+                      slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'amber' ? '#fbbf24' :
+                      '#34d399'})`,
+                  }}
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 7, ease: "linear" }}
+                  key={currentSlide}
+                />
+                {/* Progress ticks */}
+                {[1, 2, 3, 4].map((tick) => (
+                  <div
+                    key={tick}
+                    className="absolute top-1/2 -translate-y-1/2 w-px h-3 bg-white/30"
+                    style={{ left: `${tick * 20}%` }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Slide Counter */}
+            <div className="text-white/60 text-sm font-light tracking-widest">
+              <span className="text-white">{currentSlide + 1}</span>
+              <span className="mx-2">/</span>
+              <span>{slides.length}</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Enhanced floating elements that move with mouse */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Interactive floating elements that react to mouse */}
-        {[1, 2, 3].map((i) => (
+      {/* Floating Text Elements */}
+      <div className="absolute inset-0 pointer-events-none z-20">
+        {["EvaSUE", "Revival", "Faith", "Hope", "Love"].map((text, i) => (
           <motion.div
-            key={`interactive-${i}`}
-            className="absolute w-8 h-8 rounded-full bg-gradient-to-br from-red-400/20 to-transparent border border-red-400/30"
+            key={text}
+            className="absolute text-white/5 font-bold text-6xl md:text-8xl"
             style={{
-              left: `${20 + i * 25}%`,
-              top: `${15 + i * 20}%`,
+              left: `${10 + i * 20}%`,
+              top: `${15 + i * 10}%`,
             }}
             animate={{
-              y: [0, -25, 0],
-              rotate: [0, 360, 0],
+              y: [0, -20, 0],
+              rotate: [0, 5, 0],
+              opacity: [0.03, 0.05, 0.03],
             }}
             transition={{
-              duration: 6 + i * 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-        
-        {/* More floating shapes */}
-        {[1, 2, 3].map((i) => (
-          <motion.div
-            key={`shape-${i}`}
-            className="absolute w-6 h-6 rounded-lg bg-gradient-to-br from-sky-400/20 to-transparent border border-sky-400/30 rotate-45"
-            style={{
-              right: `${15 + i * 20}%`,
-              bottom: `${20 + i * 15}%`,
-            }}
-            animate={{
-              y: [0, 30, 0],
-              rotate: [45, 405, 45],
-            }}
-            transition={{
-              duration: 7 + i * 1.5,
+              duration: 10 + i * 2,
               repeat: Infinity,
               ease: "easeInOut",
               delay: i * 0.5,
             }}
-          />
+          >
+            {text}
+          </motion.div>
         ))}
       </div>
+
+      {/* Transition Overlay */}
+      <AnimatePresence>
+        {isTransitioning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black z-40 pointer-events-none"
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
