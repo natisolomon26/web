@@ -9,7 +9,7 @@ const slides = [
   {
     id: 1,
     title: "Welcome to EvaSUE",
-    subtitle: "Ethiopian Students Union in Ethiopia",
+    subtitle: "Ethiopian Students Union",
     background: "/images/bg-5.jpg",
     badgeText: "ADVANCING THE KINGDOM OF GOD",
     gradient: "from-red-500/20 via-sky-500/20 to-purple-500/20",
@@ -478,7 +478,7 @@ export default function Hero() {
                        slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'blue' ? '#3b82f6' :
                        slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'purple' ? '#8b5cf6' :
                        slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'amber' ? '#f59e0b' :
-                       '#10b981',
+                       '#b08d10ff',
               }}
             />
           </div>
@@ -560,11 +560,11 @@ export default function Hero() {
                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'blue' ? '#3b82f6' :
                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'purple' ? '#8b5cf6' :
                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'amber' ? '#f59e0b' :
-                      '#10b981'}, ${slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'red' ? '#f87171' :
+                      '#b99a10ff'}, ${slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'red' ? '#f87171' :
                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'blue' ? '#60a5fa' :
                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'purple' ? '#a78bfa' :
                       slides[currentSlide].gradient.split(' ')[1].split('-')[0] === 'amber' ? '#fbbf24' :
-                      '#34d399'})`,
+                      '#c3d334ff'})`,
                   }}
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}

@@ -55,11 +55,11 @@ export default function Header() {
 
   // Color themes for hover effects
   const colorThemes = {
-    "Home": { primary: "from-blue-500 to-cyan-400", secondary: "from-blue-100 to-cyan-50" },
-    "About": { primary: "from-purple-500 to-pink-500", secondary: "from-purple-100 to-pink-50" },
-    "Student Ministry": { primary: "from-emerald-500 to-teal-400", secondary: "from-emerald-100 to-teal-50" },
-    "Resource": { primary: "from-amber-500 to-orange-400", secondary: "from-amber-100 to-orange-50" },
-    "Contact": { primary: "from-red-500 to-rose-400", secondary: "from-red-100 to-rose-50" },
+    "Home": { primary: "from-sky-500 to-sky-400", secondary: "from-sky-100 to-sky-50" },
+    "About": { primary: "from-sky-500 to-sky-600", secondary: "from-sky-100 to-sky-50" },
+    "Student Ministry": { primary: "from-sky-500 to-sky-600", secondary: "from-sky-100 to-sky-50" },
+    "Resource": { primary: "from-sky-500 to-sky-600", secondary: "from-sky-100 to-sky-50" },
+    "Contact": { primary: "from-sky-500 to-sky-600", secondary: "from-sky-100 to-sky-50" },
     "default": { primary: "from-sky-500 to-blue-500", secondary: "from-sky-100 to-blue-50" }
   };
 
@@ -448,14 +448,14 @@ export default function Header() {
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative overflow-hidden bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-6 py-3 text-sm font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                className="group relative overflow-hidden bg-gradient-to-r from-red-500 via-red-700 to-red-600 text-white px-6 py-3 text-sm font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
                 style={{
                   boxShadow: "0 4px 20px rgba(239, 68, 68, 0.3)",
                 }}
               >
                 {/* Animated gradient background */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-600"
+                  className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-500 to-red-600"
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                   }}
