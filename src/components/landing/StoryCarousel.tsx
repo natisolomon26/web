@@ -9,14 +9,9 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Heart, 
-  Share2,
   BookOpen,
   User,
-  Calendar,
-  Clock,
-  Sparkles,
-  Volume2,
-  Eye
+  Sparkles
 } from "lucide-react";
 import Image from "next/image";
 import "@splidejs/react-splide/css";
@@ -67,6 +62,7 @@ const slides = [
 export default function StoryCarousel() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const splideRef = useRef<any>(null);
 
   // Auto-play functionality
@@ -82,6 +78,7 @@ export default function StoryCarousel() {
     return () => clearInterval(interval);
   }, [isPlaying]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSlideChange = (splide: any) => {
     setCurrentIndex(splide.index);
   };
@@ -105,7 +102,7 @@ export default function StoryCarousel() {
             <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              className="w-12 h-12 rounded-full bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center"
+              className="w-12 h-12 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 flex items-center justify-center"
             >
               <BookOpen className="w-6 h-6 text-white" />
             </motion.div>

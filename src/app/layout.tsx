@@ -6,7 +6,12 @@ import LayoutWrapper from '../components/layout/LayoutWrapper';
 import { Toaster } from "react-hot-toast";
 import { QueryProvider } from '../providers/QueryProviders';
 
-const inter = Inter({ subsets: ['latin'] });
+// Load Inter font with a CSS variable
+const inter = Inter({ 
+  subsets: ['latin'], 
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Evasue Ethiopia - Christian Student Fellowship',
@@ -28,14 +33,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        {/* Pass children to the new LayoutWrapper */}
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans antialiased text-gray-800">
         <QueryProvider>
-        <LayoutWrapper>
-          {children}
-          <Toaster position="top-right" />
-        </LayoutWrapper>
+          <LayoutWrapper>
+            {children}
+            <Toaster position="top-right" />
+          </LayoutWrapper>
         </QueryProvider>
       </body>
     </html>

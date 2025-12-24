@@ -32,7 +32,7 @@ export default function Header() {
         { label: "What we believe", link: "/page/about/believe" },
         { label: "Who we are", link: "/page/about/who-we-are" },
         { label: "Leadership", link: "/page/about/leadership" },
-        { label: "General Secretary", link: "/page/about/general-secretary" }
+        { label: "General Secretary", link: "/page/about/secretary" }
       ],
     },
     {
@@ -43,14 +43,7 @@ export default function Header() {
         { label: "Evangelism and Mission", link: "/student/evangelism" },
       ],
     },
-    
-    {
-      label: "Resource",
-      subMenu: [
-        { label: "Videos", link: "/page/videos" },
-      ],
-    },
-    { label: "Contact", link: "/contact" }
+    { label: "Contact", link: "/page/contact" }
   ];
 
   // Color themes for hover effects

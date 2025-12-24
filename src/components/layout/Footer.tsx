@@ -369,31 +369,9 @@ export const Footer: React.FC = () => {
                 </Link>
               ))}
             </motion.div>
-
-            {/* Prayer Button */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.9 }}
-            >
-              <Link
-                href="/pray"
-                className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-white/20 to-white/20 border border-white/10 text-white/70 hover:text-purple-200 hover:border-red-400/30 transition-all duration-300"
-              >
-                <Cross className="w-4 h-4 group-hover:animate-pulse" />
-                <span className="text-sm font-medium">Pray With Us</span>
-              </Link>
-            </motion.div>
           </div>
-
-          {/* Signature */}
-          
         </div>
       </div>
-
-      {/* Back to Top Button */}
-      
     </motion.footer>
   );
 };
