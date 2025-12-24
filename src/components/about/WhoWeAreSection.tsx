@@ -19,10 +19,10 @@ export default function WhoWeAreSection() {
   
   // Stats data
   const stats = [
-    { value: "1963", label: "Founded", icon: "📅", color: "text-red-400" },
-    { value: "50+", label: "Years Legacy", icon: "🏛️", color: "text-sky-400" },
-    { value: "150+", label: "Campuses", icon: "🎓", color: "text-emerald-400" },
-    { value: "50,000+", label: "Students", icon: "👥", color: "text-amber-400" },
+    { value: "1963", label: "Founded", color: "text-red-400" },
+    { value: "50+", label: "Years Legacy", color: "text-sky-400" },
+    { value: "150+", label: "Campuses", color: "text-emerald-400" },
+    { value: "50,000+", label: "Students", color: "text-amber-400" },
   ];
 
   return (
@@ -302,13 +302,7 @@ export default function WhoWeAreSection() {
                       whileHover={{ x: 5 }}
                     >
                       <div className="flex items-start gap-4">
-                        <motion.div
-                          className="w-12 h-12 bg-gradient-to-br from-red-500/20 to-red-600/10 rounded-lg flex items-center justify-center"
-                          animate={{ rotate: [0, 5, 0, -5, 0] }}
-                          transition={{ duration: 4, repeat: Infinity }}
-                        >
-                          <span className="text-2xl">🎓</span>
-                        </motion.div>
+                        
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
@@ -337,13 +331,7 @@ export default function WhoWeAreSection() {
                       whileHover={{ x: 5 }}
                     >
                       <div className="flex items-start gap-4">
-                        <motion.div
-                          className="w-12 h-12 bg-gradient-to-br from-sky-500/20 to-sky-600/10 rounded-lg flex items-center justify-center"
-                          animate={{ rotate: [0, -5, 0, 5, 0] }}
-                          transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-                        >
-                          <span className="text-2xl">👨‍🎓</span>
-                        </motion.div>
+                        
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
                             <div className="w-2 h-2 bg-sky-400 rounded-full animate-pulse" />
@@ -382,7 +370,6 @@ export default function WhoWeAreSection() {
                           className="text-center group/stat"
                           whileHover={{ y: -5 }}
                         >
-                          <div className="text-2xl mb-1">{stat.icon}</div>
                           <div className={`text-xl font-bold ${stat.color} mb-1`}>
                             {stat.value}
                           </div>

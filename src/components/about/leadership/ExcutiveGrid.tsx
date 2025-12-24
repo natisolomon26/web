@@ -8,9 +8,7 @@ export default function ExecutiveGrid() {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-semibold text-center mb-16 tracking-tight">
-          Executive Leadership
-        </h2>
+        
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-14">
           {executives.map((exec) => (

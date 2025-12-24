@@ -97,7 +97,6 @@ export default function BeliefsSection() {
         text: "text-sky-700",
         border: "border-sky-200",
         hover: "hover:bg-sky-100",
-        icon: "text-sky-600",
         gradient: "from-sky-500 to-sky-600"
       },
       emerald: {
@@ -105,7 +104,6 @@ export default function BeliefsSection() {
         text: "text-emerald-700",
         border: "border-emerald-200",
         hover: "hover:bg-emerald-100",
-        icon: "text-emerald-600",
         gradient: "from-emerald-500 to-emerald-600"
       },
       amber: {
@@ -113,7 +111,6 @@ export default function BeliefsSection() {
         text: "text-amber-700",
         border: "border-amber-200",
         hover: "hover:bg-amber-100",
-        icon: "text-amber-600",
         gradient: "from-amber-500 to-amber-600"
       },
       red: {
@@ -121,7 +118,6 @@ export default function BeliefsSection() {
         text: "text-red-700",
         border: "border-red-200",
         hover: "hover:bg-red-100",
-        icon: "text-red-600",
         gradient: "from-red-500 to-red-600"
       },
       purple: {
@@ -129,7 +125,6 @@ export default function BeliefsSection() {
         text: "text-purple-700",
         border: "border-purple-200",
         hover: "hover:bg-purple-100",
-        icon: "text-purple-600",
         gradient: "from-purple-500 to-purple-600"
       },
       pink: {
@@ -137,7 +132,6 @@ export default function BeliefsSection() {
         text: "text-pink-700",
         border: "border-pink-200",
         hover: "hover:bg-pink-100",
-        icon: "text-pink-600",
         gradient: "from-pink-500 to-pink-600"
       },
       indigo: {
@@ -145,7 +139,6 @@ export default function BeliefsSection() {
         text: "text-indigo-700",
         border: "border-indigo-200",
         hover: "hover:bg-indigo-100",
-        icon: "text-indigo-600",
         gradient: "from-indigo-500 to-indigo-600"
       },
       cyan: {
@@ -153,7 +146,6 @@ export default function BeliefsSection() {
         text: "text-cyan-700",
         border: "border-cyan-200",
         hover: "hover:bg-cyan-100",
-        icon: "text-cyan-600",
         gradient: "from-cyan-500 to-cyan-600"
       },
       green: {
@@ -161,7 +153,6 @@ export default function BeliefsSection() {
         text: "text-green-700",
         border: "border-green-200",
         hover: "hover:bg-green-100",
-        icon: "text-green-600",
         gradient: "from-green-500 to-green-600"
       },
       orange: {
@@ -169,7 +160,6 @@ export default function BeliefsSection() {
         text: "text-orange-700",
         border: "border-orange-200",
         hover: "hover:bg-orange-100",
-        icon: "text-orange-600",
         gradient: "from-orange-500 to-orange-600"
       },
       violet: {
@@ -177,7 +167,6 @@ export default function BeliefsSection() {
         text: "text-violet-700",
         border: "border-violet-200",
         hover: "hover:bg-violet-100",
-        icon: "text-violet-600",
         gradient: "from-violet-500 to-violet-600"
       },
       rose: {
@@ -185,7 +174,6 @@ export default function BeliefsSection() {
         text: "text-rose-700",
         border: "border-rose-200",
         hover: "hover:bg-rose-100",
-        icon: "text-rose-600",
         gradient: "from-rose-500 to-rose-600"
       }
     };
@@ -383,7 +371,7 @@ export default function BeliefsSection() {
                     {[1, 2, 3].map((particle) => (
                       <motion.div
                         key={particle}
-                        className={`absolute w-1 h-1 rounded-full ${themeClasses.icon}`}
+                        className={`absolute w-1 h-1 rounded-full`}
                         style={{
                           left: `${20 + particle * 20}%`,
                           top: `${30 + particle * 15}%`,
@@ -413,34 +401,12 @@ export default function BeliefsSection() {
                           }}
                           transition={{ duration: 0.6 }}
                           className="relative"
-                        >
-                          <div className={`w-12 h-12 rounded-xl ${themeClasses.bg} border ${themeClasses.border} flex items-center justify-center shadow-lg`}>
-                            <Icon className={`w-6 h-6 ${themeClasses.icon}`} />
-                          </div>
-                          
-                          {/* Corner Accents */}
-                          <div className="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-current opacity-30" style={{ color: themeClasses.icon }} />
-                          <div className="absolute -top-1 -right-1 w-3 h-3 border-t border-r border-current opacity-30" style={{ color: themeClasses.icon }} />
-                          <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b border-l border-current opacity-30" style={{ color: themeClasses.icon }} />
-                          <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-current opacity-30" style={{ color: themeClasses.icon }} />
+                        >   
                         </motion.div>
-                        
-                        {/* Card Number */}
-                        <div className="text-5xl font-bold text-gray-200">
-                          0{index + 1}
-                        </div>
                       </div>
                       
                       {/* Interactive Indicator */}
-                      <motion.div
-                        animate={{ 
-                          scale: hoveredCard === index ? 1.5 : 1,
-                          rotate: hoveredCard === index ? 180 : 0,
-                        }}
-                        transition={{ duration: 0.3 }}
-                        className="w-2 h-2 rounded-full bg-current opacity-0 group-hover:opacity-100"
-                        style={{ color: themeClasses.icon }}
-                      />
+                      
                     </div>
 
                     {/* Belief Text */}
@@ -462,17 +428,7 @@ export default function BeliefsSection() {
                       viewport={{ once: true }}
                       transition={{ delay: 0.5 + index * 0.05, duration: 0.8 }}
                     >
-                      <motion.div
-                        className={`h-full bg-gradient-to-r ${belief.color}`}
-                        animate={{
-                          x: hoveredCard === index ? ["0%", "100%", "0%"] : "0%",
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: hoveredCard === index ? Infinity : 0,
-                          ease: "easeInOut",
-                        }}
-                      />
+                      
                     </motion.div>
                   </div>
                 </motion.div>
