@@ -168,8 +168,8 @@ export default function Hero() {
         </AnimatePresence>
         
         {/* Subtle overlays */}
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-900/60 via-sky-800/50 to-sky-900/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-sky-950/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-red-700/50 to-red-800/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-red-400/30 via-transparent to-transparent" />
       </div>
 
       {/* Main Content */}

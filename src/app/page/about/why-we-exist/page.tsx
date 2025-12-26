@@ -1,6 +1,5 @@
 import PageBanner from "@/src/components/ui/PageBanner";
-import WhoWeAreSection from "@/src/components/about/WhoWeAreSection";
-import CommitmentSection from "@/src/components/about/CommitmentSection";
+import ExistSection from "@/src/components/about/ExistSection";
 
 export default function WhoWeArePage() {
   return (
@@ -11,8 +10,7 @@ export default function WhoWeArePage() {
         image="/images/bg3.JPG"
       />
 
-      <WhoWeAreSection />
-      <CommitmentSection />
+      <ExistSection />
     </>
   );
 }

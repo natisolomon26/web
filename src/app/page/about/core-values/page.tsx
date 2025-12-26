@@ -1,16 +1,15 @@
 import PageBanner from "@/src/components/ui/PageBanner";
-import BeliefsSection from "@/src/components/about/BeliefsSection";
-
-export default function BelievePage() {
+import CoreValuesSection from "@/src/components/about/CoreValueSection";
+export default function WhoWeArePage() {
   return (
     <>
       <PageBanner 
-        title="What We Believe"
+        title="Our Core Beliefs"
         subtitle="The foundational truths that shape our faith, guide our ministry, and unite our community in Christ."
         image="/images/bg3.JPG"
       />
 
-      <BeliefsSection />
+      <CoreValuesSection />
     </>
   );
 }

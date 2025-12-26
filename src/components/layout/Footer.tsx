@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { 
-  Mail, Phone, MapPin, Facebook, Youtube, Instagram, 
-  Twitter, Linkedin, Heart, ArrowUpRight, Cross, Globe, 
-  Users, Shield, Sparkles, Send, ChevronRight
+  Mail, ArrowUpRight, Cross, Send, ChevronRight
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -23,14 +21,6 @@ export const Footer: React.FC = () => {
       setTimeout(() => setSubscribed(false), 3000);
     }
   };
-
-  const socialLinks = [
-    { icon: Facebook, label: 'Facebook', href: '#', color: 'text-blue-500 hover:text-blue-500' },
-    { icon: Instagram, label: 'Instagram', href: '#', color: 'text-pink-500 hover:text-pink-500' },
-    { icon: Twitter, label: 'Twitter', href: '#', color: 'text-sky-500 hover:text-sky-500' },
-    { icon: Youtube, label: 'YouTube', href: '#', color: 'text-red-500 hover:text-red-600' },
-    { icon: Linkedin, label: 'LinkedIn', href: '#', color: 'text-blue-600 hover:text-blue-600' },
-  ];
 
   return (
     <motion.footer 
@@ -138,27 +128,7 @@ export const Footer: React.FC = () => {
             </p>
 
             {/* Social Links */}
-            <div className="flex gap-4">
-              {socialLinks.map((social, index) => {
-                const Icon = social.icon;
-                return (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + index * 0.1 }}
-                    whileHover={{ scale: 1.2, y: -3 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`w-10 h-10 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center ${social.color} transition-all duration-300 hover:bg-white/10 hover:border-white/20`}
-                    aria-label={social.label}
-                  >
-                    <Icon className="w-5 h-5" />
-                  </motion.a>
-                );
-              })}
-            </div>
+            
           </motion.div>
 
           {/* Quick Links Column */}
@@ -175,13 +145,12 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: "About Us", href: "/about", icon: Users },
-                { label: "Our Beliefs", href: "/beliefs", icon: Shield },
-                { label: "Campuses", href: "/campuses", icon: Globe },
-                { label: "Resources", href: "/resources", icon: Sparkles },
-                { label: "Events", href: "/events", icon: Heart },
+                { label: "Who We Are", href: "/about" },
+                { label: "Our Beliefs", href: "/beliefs" },
+                { label: "Core Values", href: "/campuses" },
+                { label: "Commitment", href: "/resources" }
               ].map((link) => {
-                const Icon = link.icon;
+                
                 return (
                   <motion.li
                     key={link.href}
@@ -202,7 +171,6 @@ export const Footer: React.FC = () => {
                         transition={{ duration: 0.3 }}
                         className="w-5 h-5"
                       >
-                        <Icon className="w-4 h-4" />
                       </motion.div>
                       <span className="flex-1">{link.label}</span>
                       <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -1,16 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 const aboutLinks = [
-  { label: 'What We Believe', href: '/about/what-we-believe' },
-  { label: 'Who We Are', href: '/about/who-we-are' },
-  { label: 'Why We Exist', href: '/about/why-we-exist' },
+  { label: 'What We Believe', href: '/page/about/believe' },
+  { label: 'Who We Are', href: '/page/about/who-we-are' },
+  { label: 'Why We Exist', href: '/page/about/why-we-exist' },
   { label: 'Leadership', href: '/about/leadership' },
   { label: 'General Secretary', href: '/about/general-secretary' },
-  { label: 'Our Core Values', href: '/about/core-values' },
+  { label: 'Our Core Values', href: '/page/about/core-values' },
+  { label: 'Our Core Commitments', href: '/page/about/commitments' }
 ];
 
 const ministryLinks = [
@@ -21,6 +22,19 @@ const ministryLinks = [
 export default function Navigation() {
   const [open, setOpen] = useState<string | null>(null);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleMouseEnter = (menu: string) => {
     if (hoverTimeout) clearTimeout(hoverTimeout);
@@ -41,12 +55,14 @@ export default function Navigation() {
     'block px-6 py-3.5 text-gray-700 transition-all duration-300 hover:pl-8 hover:bg-sky-900 hover:text-white group';
 
   return (
-    <nav className="
-      sticky top-0 z-50
+    <nav className={`
+      ${isScrolled ? 'fixed' : 'sticky'} top-0 z-50
       border-t-4 border-amber-400
       bg-gradient-to-b from-sky-900 to-sky-800 backdrop-blur-xl
       shadow-lg shadow-amber-900/30
-    ">
+      transition-all duration-300
+      ${isScrolled ? 'w-full' : ''}
+    `}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
 
