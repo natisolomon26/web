@@ -64,7 +64,7 @@ export default function Navigation() {
       ${isScrolled ? 'w-full' : ''}
     `}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-13 items-center justify-between">
 
           {/* LEFT NAV */}
           <ul className="flex items-center gap-8 font-medium">
