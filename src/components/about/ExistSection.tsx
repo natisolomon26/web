@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Target, Users, HandHeart, Globe, ArrowRight, CheckCircle, Heart, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 
 export default function ExistSection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -11,7 +11,7 @@ export default function ExistSection() {
       title: "God's Purpose is Our Core",
       description: "We advance the Kingdom of God by equipping students to influence universities, nations, and the world.",
       extendedDescription: "Our mission flows from God's eternal purpose to reconcile all things to Himself through Christ.",
-      color: "blue",
+      color: "amber",
       features: [
         "Kingdom-focused mission",
         "Christ-centered approach",
@@ -22,7 +22,7 @@ export default function ExistSection() {
       title: "Our Focus: Students",
       description: "Changing students today shapes the world tomorrow. University years define the next 40 years of impact.",
       extendedDescription: "Students represent future leaders, innovators, and influencers who will transform societies.",
-      color: "emerald",
+      color: "amber",
       features: [
         "Future leaders development",
         "Formative years investment",
@@ -33,7 +33,7 @@ export default function ExistSection() {
       title: "Our Method: Serving",
       description: "We serve with humility and love, following Christ's example of putting others first.",
       extendedDescription: "Service is our identity—embodying Christ's servant leadership in practical, tangible ways.",
-      color: "purple",
+      color: "amber",
       features: [
         "Humility in action",
         "Love-driven service",
@@ -55,30 +55,6 @@ export default function ExistSection() {
 
   const getColorClasses = (color: string) => {
     switch (color) {
-      case "blue":
-        return {
-          text: "text-blue-600",
-          bg: "bg-blue-50",
-          border: "border-blue-100",
-          hover: "bg-blue-100",
-          accent: "bg-blue-500"
-        };
-      case "emerald":
-        return {
-          text: "text-emerald-600",
-          bg: "bg-emerald-50",
-          border: "border-emerald-100",
-          hover: "bg-emerald-100",
-          accent: "bg-emerald-500"
-        };
-      case "purple":
-        return {
-          text: "text-purple-600",
-          bg: "bg-purple-50",
-          border: "border-purple-100",
-          hover: "bg-purple-100",
-          accent: "bg-purple-500"
-        };
       case "amber":
         return {
           text: "text-amber-600",
@@ -102,24 +78,7 @@ export default function ExistSection() {
     <section className="relative w-full bg-gradient-to-b from-white to-gray-50 py-16 md:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-full border border-blue-100 mb-6">
-            <motion.div
-              className="w-2 h-2 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span className="text-sm font-semibold text-blue-700">Our Purpose</span>
-          </div>
-          
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Why We <span className="text-blue-600">Exist</span>
-          </h2>
-          
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            The foundation of our mission — purpose, focus, method, and impact
-          </p>
-        </div>
+      
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">

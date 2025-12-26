@@ -5,8 +5,8 @@ export default function WhoWeArePage() {
   return (
     <>
       <PageBanner 
-        title="Who We Are"
-        subtitle="A fellowship centered on Jesus Christ"
+        title="Why We Exist"
+        subtitle="A fellowship of students and graduates following Christ, growing together, and transforming campuses across Ethiopia."
         image="/images/bg3.JPG"
       />
 

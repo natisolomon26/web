@@ -29,21 +29,21 @@ export default function CoreValuesSection() {
       title: "Centrality of God's Word",
       description: "We affirm Scripture as the revelation of God's person and will, culminating in Jesus Christ. The Bible is our foundation for life, transformation, and ministry.",
       image: "/images/bg1.jpg",
-      overlayColor: "from-sky-900/95 via-sky-800/80 to-sky-700/60",
+      overlayColor: "from-amber-600/55 via-amber-700/50 to-amber-500/50",
       accentColor: "text-sky-400",
     },
     {
       title: "Student Focused",
       description: "EvaSUE exists for students. Our mission is to serve and equip them to advance God's Kingdom in their campuses, communities, and future careers.",
       image: "/images/bg2.JPG",
-      overlayColor: "from-emerald-900/95 via-emerald-800/80 to-emerald-700/60",
+      overlayColor: "from-amber-600/55 via-amber-700/50 to-amber-500/50",
       accentColor: "text-emerald-400",
     },
     {
       title: "Unity in Diversity",
       description: "We believe Christ unites us across denomination, ethnicity, language, and economy. In Him, we are one body, celebrating our diversity in unity.",
       image: "/images/bg3.JPG",
-      overlayColor: "from-red-900/95 via-red-800/80 to-red-700/60",
+      overlayColor: "from-amber-600/55 via-amber-700/50 to-amber-500/50",
       accentColor: "text-red-400",
     },
   ];
@@ -109,76 +109,7 @@ export default function CoreValuesSection() {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Enhanced Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-20"
-        >
-          {/* Animated badge */}
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", duration: 0.6 }}
-            className="inline-block mb-6"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-sky-400 to-red-400 rounded-full blur-lg opacity-30 animate-pulse"></div>
-              <div className="relative px-6 py-2.5 bg-white/80 backdrop-blur-sm rounded-full border border-white/50 shadow-sm">
-                <div className="flex items-center gap-2">
-                  <motion.div
-                    className="w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
-                    animate={{ scale: [1, 1.3, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <span className="text-sm font-semibold text-sky-700 uppercase tracking-wider">
-                    Foundational Pillars
-                  </span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
 
-          {/* Main heading with gradient */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-          >
-            <span className="bg-gradient-to-r from-sky-600 via-sky-700 to-sky-600 bg-clip-text text-transparent">
-              Our Core
-            </span>
-            {" "}
-            <span className="bg-gradient-to-r from-red-500 via-red-600 to-red-500 bg-clip-text text-transparent">
-              Values
-            </span>
-          </motion.h2>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-sky-700/80 max-w-2xl mx-auto leading-relaxed"
-          >
-            Guiding principles that shape our community, ministry, and mission
-          </motion.p>
-
-          {/* Decorative line */}
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "100px" }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 1 }}
-            className="h-1 bg-gradient-to-r from-sky-500  to-red-600 rounded-full mx-auto mt-6"
-          />
-        </motion.div>
 
         {/* Enhanced Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
@@ -246,14 +177,7 @@ export default function CoreValuesSection() {
 
                 {/* Content Container */}
                 <div className="relative h-full flex flex-col justify-between p-6 md:p-8">
-                  {/* Top Section - Icon and Number */}
                   <div className="flex items-start justify-between">
-                    
-                    
-                    {/* Card Number */}
-                    <div className="text-5xl md:text-6xl font-bold text-white/10">
-                      0{index + 1}
-                    </div>
                   </div>
 
                   {/* Middle Section - Content */}

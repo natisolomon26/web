@@ -1,18 +1,16 @@
 import PageBanner from "@/src/components/ui/PageBanner";
 import WhoWeAreSection from "@/src/components/about/WhoWeAreSection";
-import CommitmentSection from "@/src/components/about/CommitmentSection";
 
 export default function WhoWeArePage() {
   return (
     <>
       <PageBanner 
-        title="Who We Are"
-        subtitle="A fellowship centered on Jesus Christ"
+        title="Who We Are & What We Do"
+        subtitle="A fellowship of students and graduates following Christ, growing together, and transforming campuses across Ethiopia."
         image="/images/bg3.JPG"
       />
 
       <WhoWeAreSection />
-      <CommitmentSection />
     </>
   );
 }
