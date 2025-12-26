@@ -35,17 +35,17 @@ export default function Navigation() {
   };
 
   const topLinkClass =
-    'relative px-1 py-2 text-white transition-all duration-300 font-medium text-[15px] after:absolute after:-bottom-[2px] after:left-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-sky-400 after:to-sky-300 after:transition-all after:duration-400 hover:after:w-full hover:text-sky-100';
+    'relative px-1 py-2 text-white transition-all duration-300 font-medium text-[15px] after:absolute after:-bottom-[2px] after:left-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-amber-400 after:to-amber-300 after:transition-all after:duration-400 hover:after:w-full hover:text-sky-100';
 
   const dropdownItemClass =
-    'block px-6 py-3.5 text-gray-700 transition-all duration-300 hover:pl-8 hover:bg-sky-600 hover:text-white group';
+    'block px-6 py-3.5 text-gray-700 transition-all duration-300 hover:pl-8 hover:bg-sky-900 hover:text-white group';
 
   return (
     <nav className="
       sticky top-0 z-50
       border-t-4 border-amber-400
       bg-gradient-to-b from-sky-900 to-sky-800 backdrop-blur-xl
-      shadow-lg shadow-sky-900/30
+      shadow-lg shadow-amber-900/30
     ">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
