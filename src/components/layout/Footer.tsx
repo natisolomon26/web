@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { 
   Mail, ArrowUpRight, Cross, Send, ChevronRight
 } from 'lucide-react';
+import Image from 'next/image';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -65,30 +66,6 @@ export const Footer: React.FC = () => {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_95%,rgba(255,255,255,0.1)_100%)] bg-[size:60px]" />
           <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_95%,rgba(255,255,255,0.1)_100%)] bg-[size:60px]" />
         </div>
-
-        {/* Floating crosses */}
-        {[1, 2, 3, 4, 5].map((i) => (
-          <motion.div
-            key={i}
-            className="absolute text-white/10"
-            style={{
-              left: `${5 + i * 18}%`,
-              top: `${20 + i * 10}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              rotate: [0, 360],
-              scale: [1, 1.3, 1],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <Cross className="w-8 h-8" />
-          </motion.div>
-        ))}
       </div>
 
       {/* Main Content */}
@@ -104,31 +81,21 @@ export const Footer: React.FC = () => {
             className="space-y-6"
           >
             <div className="flex items-center gap-4">
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 360 }}
-                transition={{ duration: 0.4 }}
-                className="relative"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange60 rounded-full blur-lg opacity-50" />
-                <div className="relative w-14 h-14 bg-gradient-to-br from-white to-white/60 rounded-2xl flex items-center justify-center shadow-xl">
-                  <Cross className="w-7 h-7 text-sky-900" />
-                </div>
-              </motion.div>
-              <div>
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent">
-                  EvaSUE Ethiopia
-                </h3>
-                <p className="text-sm text-slate-400 mt-1">Christian Student Fellowship</p>
-              </div>
+              
+                <div className="relative flex items-center justify-center rounded-2xl  shadow-xl backdrop-blur">
+        <Image
+          src="/images.png" // update path if needed
+          alt="EvaSUE Logo"
+          width={126}
+          height={76}
+          className="object-contain"
+          priority
+        />
+      </div>
             </div>
-            
             <p className="text-slate-400 leading-relaxed">
-              Following Christ together on Ethiopian campuses — transforming students, 
-              impacting nations for eternity.
-            </p>
-
-            {/* Social Links */}
-            
+              Advancing The Kingdom Of God By Serving Students
+            </p>        
           </motion.div>
 
           {/* Quick Links Column */}
@@ -139,16 +106,13 @@ export const Footer: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="space-y-6"
           >
-            <h4 className="text-lg font-bold text-white flex items-center gap-2">
-              <ChevronRight className="w-5 h-5 text-sky-400" />
-              Quick Links
-            </h4>
+            
             <ul className="space-y-3">
               {[
-                { label: "Who We Are", href: "/about" },
-                { label: "Our Beliefs", href: "/beliefs" },
-                { label: "Core Values", href: "/campuses" },
-                { label: "Commitment", href: "/resources" }
+                { label: "Who We Are", href: "/page/about/who-we-are" },
+                { label: "Our Beliefs", href: "/page/about/believe" },
+                { label: "Core Values", href: "/page/about/core-values" },
+                { label: "Commitment", href: "/page/about/commitments" }
               ].map((link) => {
                 
                 return (
@@ -189,17 +153,13 @@ export const Footer: React.FC = () => {
             transition={{ delay: 0.3 }}
             className="space-y-6"
           >
-            <h4 className="text-lg font-bold text-white flex items-center gap-2">
-              <ChevronRight className="w-5 h-5 text-emerald-400" />
-              Get Involved
-            </h4>
+            
             <ul className="space-y-3">
               {[
-                { label: "Join Our Community", href: "/join", color: "text-emerald-400" },
-                { label: "Volunteer Opportunities", href: "/volunteer", color: "text-amber-400" },
-                { label: "Make a Donation", href: "/donate", color: "text-pink-400" },
-                { label: "Prayer Support", href: "/pray", color: "text-purple-400" },
-                { label: "Partnership", href: "/partnership", color: "text-cyan-400" },
+                { label: "Why We Exist", href: "/page/about/why-we-exist" },
+                { label: "Discipleship & Leadership", href: "/page/student/discipleship" },
+                { label: "Evangelism & Mission", href: "/page/student/evangelisms" },
+                { label: "Make Donation", href: "/give" }
               ].map((link) => (
                 <motion.li
                   key={link.href}
@@ -208,9 +168,9 @@ export const Footer: React.FC = () => {
                 >
                   <Link 
                     href={link.href} 
-                    className={`flex items-center gap-2 text-slate-400 hover:${link.color} transition-colors duration-300 group`}
+                    className={`flex items-center gap-2 text-slate-400 transition-colors duration-300 group`}
                   >
-                    <div className={`w-1.5 h-1.5 rounded-full ${link.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                    <div className={`w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                     <span className="flex-1">{link.label}</span>
                   </Link>
                 </motion.li>
@@ -226,10 +186,7 @@ export const Footer: React.FC = () => {
             transition={{ delay: 0.4 }}
             className="space-y-6"
           >
-            <h4 className="text-lg font-bold text-white flex items-center gap-2">
-              <ChevronRight className="w-5 h-5 text-amber-400" />
-              Stay Updated
-            </h4>
+           
             <p className="text-slate-400 text-sm">
               Subscribe to our newsletter for updates, events, and spiritual insights.
             </p>
@@ -291,12 +248,8 @@ export const Footer: React.FC = () => {
             </AnimatePresence>
           </motion.div>
         </div>
-
-        {/* Contact Info Bar */}
-      
-
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8">
+        <div className="border-t border-white/10 pt-2">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             {/* Copyright */}
             <motion.div
@@ -307,35 +260,14 @@ export const Footer: React.FC = () => {
               className="text-center md:text-left"
             >
               <p className="text-slate-500 text-sm">
-                &copy; {currentYear} EvaSUE in Ethiopia Christian Student Fellowship.
+                &copy; {currentYear} EvaSUE.
               </p>
               <p className="text-slate-600 text-xs mt-1">
-                Transforming campuses, impacting eternity.
+                የኢትዮጵያ ወንጌላዊያን ተማሪዎችና ምሩቃን ማህበር (ኢቫሱ)
               </p>
-            </motion.div>
-
-            {/* Additional Links */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8 }}
-              className="flex flex-wrap gap-6 justify-center"
-            >
-              {[
-                { label: "Privacy Policy", href: "/privacy" },
-                { label: "Terms of Service", href: "/terms" },
-                { label: "FAQs", href: "/faq" },
-                { label: "Sitemap", href: "/sitemap" },
-              ].map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="text-slate-500 hover:text-sky-400 text-sm transition-colors duration-300"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              <p className="text-slate-600 text-xs">
+                Evangelical Students’ and Graduates’ Union of Ethiopia
+              </p>
             </motion.div>
           </div>
         </div>

@@ -15,8 +15,8 @@ const aboutLinks = [
 ];
 
 const ministryLinks = [
-  { label: 'Discipleship & Leadership Strategy', href: '/ministry/discipleship' },
-  { label: 'Evangelism & Mission Mobilization', href: '/ministry/evangelism' },
+  { label: 'Discipleship & Leadership Strategy', href: '/page/student/discipleship' },
+  { label: 'Evangelism & Mission Mobilization', href: '/page/student/evangelism' },
 ];
 
 export default function Navigation() {

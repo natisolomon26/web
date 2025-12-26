@@ -2,10 +2,6 @@
 
 import React, { useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { 
-  BookOpen, Users, GraduationCap, Church, Shield, 
-  Target, ArrowRight, Sparkles, Heart, Cross, Star 
-} from "lucide-react";
 
 export default function DiscipleshipMinistry() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -16,16 +12,15 @@ export default function DiscipleshipMinistry() {
       title: "Bible Study",
       description: "Knowing and obeying the Scriptures is core to discipleship. We support the spiritual growth of students by helping them develop a love for the Word of God through group Bible studies.",
       extendedDescription: "Our Bible study programs go beyond surface-level reading to deep theological engagement. We equip students to interpret, apply, and live out God's Word in their daily lives, fostering a transformative relationship with Scripture.",
-      color: "sky",
-      gradient: "from-sky-500 via-sky-400 to-sky-600",
-      stats: { value: "150+", label: "Study Groups" }
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
     },
     {
       title: "Small Group",
       description: "Since community is essential for spiritual development, we encourage small group ministry among students — promoting Mission, Fellowship, Prayer and Nurturing.",
       extendedDescription: "Intimate settings where authentic relationships form. Our small groups create safe spaces for vulnerability, accountability, and spiritual growth through shared experiences and mutual support.",
-      color: "emerald",
-      gradient: "from-emerald-500 via-emerald-400 to-emerald-600",
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
     },
     {
       title: "Trainings",
@@ -38,36 +33,55 @@ export default function DiscipleshipMinistry() {
       title: "Local Church Connections",
       description: "We help students stay strongly connected with their local churches before and after graduation.",
       extendedDescription: "Building bridges between campus ministry and local congregations. We facilitate meaningful connections that ensure students remain rooted in church communities throughout their academic journey and beyond.",
-      color: "purple",
-      gradient: "from-purple-500 via-purple-400 to-purple-600",
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
     },
     {
       title: "Leadership Development",
       description: "We develop leadership skills through reading, discussions, mentorship, and exposure to ministry opportunities.",
       extendedDescription: "Nurturing servant leaders who lead with Christ-like character. Our leadership development program combines mentorship, practical ministry experience, and character formation to raise the next generation of Christian leaders.",
-      color: "red",
-      gradient: "from-red-500 via-red-400 to-red-600",
-    }
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
+    },
+        {
+      title: "Train Student Leaders",
+      description: "We equip student leaders through targeted training on biblical leadership, character, and practical ministry skills to serve effectively on campus.",
+      extendedDescription: "Our comprehensive leadership training program includes workshops on servant leadership, conflict resolution, team building, and spiritual disciplines, preparing students to lead with integrity and wisdom.",
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
+    },
+    {
+      title: "Small Group Ministry Training",
+      description: "We train leaders to launch and shepherd small groups — spaces for discipleship, prayer, and authentic fellowship among students.",
+      extendedDescription: "Specialized training in small group dynamics, facilitation skills, pastoral care, and creating environments where authentic community and spiritual growth can flourish.",
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
+    },
+    {
+      title: "Model Leadership in Service",
+      description: "Our Campus Staff Workers walk alongside student leaders, modeling Christ-like service and leadership in real campus ministry contexts.",
+      extendedDescription: "Staff members provide hands-on coaching, demonstrating servant leadership through practical ministry involvement and sharing life-on-life discipleship experiences.",
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
+    },
+    {
+      title: "Build Skills Through Growth",
+      description: "We challenge leaders to grow through reading, discussions, and new responsibilities — developing wisdom, vision, and resilience.",
+      extendedDescription: "Development programs that include leadership reading circles, skill-building workshops, and progressive responsibility assignments to build competence and confidence.",
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
+    },
+    {
+      title: "Character Development",
+      description: "Focusing on developing Christ-like character, integrity, and emotional intelligence as foundational to effective leadership.",
+      extendedDescription: "Character formation programs that emphasize humility, courage, wisdom, and other virtues essential for leading with authenticity and impact.",
+      color: "amber",
+      gradient: "from-amber-500 via-amber-400 to-amber-600",
+    },
   ];
 
   const getColorClass = (color: string, type: string) => {
     const classes = {
-      sky: {
-        text: "text-sky-600",
-        hover: "text-sky-700",
-        bg: "bg-sky-500",
-        light: "bg-sky-500/10",
-        border: "border-sky-500/20",
-        gradient: "from-sky-500/20 to-sky-600/10"
-      },
-      emerald: {
-        text: "text-emerald-600",
-        hover: "text-emerald-700",
-        bg: "bg-emerald-500",
-        light: "bg-emerald-500/10",
-        border: "border-emerald-500/20",
-        gradient: "from-emerald-500/20 to-emerald-600/10"
-      },
       amber: {
         text: "text-amber-600",
         hover: "text-amber-700",
@@ -75,190 +89,14 @@ export default function DiscipleshipMinistry() {
         light: "bg-amber-500/10",
         border: "border-amber-500/20",
         gradient: "from-amber-500/20 to-amber-600/10"
-      },
-      purple: {
-        text: "text-purple-600",
-        hover: "text-purple-700",
-        bg: "bg-purple-500",
-        light: "bg-purple-500/10",
-        border: "border-purple-500/20",
-        gradient: "from-purple-500/20 to-purple-600/10"
-      },
-      red: {
-        text: "text-red-600",
-        hover: "text-red-700",
-        bg: "bg-red-500",
-        light: "bg-red-500/10",
-        border: "border-red-500/20",
-        gradient: "from-red-500/20 to-red-600/10"
-      },
-      indigo: {
-        text: "text-indigo-600",
-        hover: "text-indigo-700",
-        bg: "bg-indigo-500",
-        light: "bg-indigo-500/10",
-        border: "border-indigo-500/20",
-        gradient: "from-indigo-500/20 to-indigo-600/10"
-      },
+      }
     };
     return classes[color as keyof typeof classes][type as keyof (typeof classes)[keyof typeof classes]];
   };
 
   return (
     <section className="relative w-full overflow-hidden bg-gradient-to-b from-white via-sky-50/30 to-white py-24 md:py-32">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Gradient orbs */}
-        <motion.div
-          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-sky-400/10 via-transparent to-transparent rounded-full blur-3xl"
-          animate={{
-            y: [-60, 60, -60],
-            x: [-40, 40, -40],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tr from-emerald-400/10 via-transparent to-transparent rounded-full blur-3xl"
-          animate={{
-            y: [60, -60, 60],
-            x: [40, -40, 40],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        {/* Floating icons */}
-        {[1, 2, 3, 4].map((i) => (
-          <motion.div
-            key={i}
-            className="absolute text-orange-600/70"
-            style={{
-              left: `${5 + i * 20}%`,
-              top: `${10 + i * 15}%`,
-            }}
-            animate={{
-              y: [0, -40, 0],
-              rotate: [0, 360],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 8 + i * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <BookOpen className="w-10 h-10" />
-          </motion.div>
-        ))}
-
-        {/* Geometric shapes */}
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm"
-            style={{
-              width: `${30 + i * 10}px`,
-              height: `${30 + i * 10}px`,
-              left: `${10 + i * 15}%`,
-              top: `${15 + i * 10}%`,
-            }}
-            animate={{
-              y: [0, -25, 0],
-              x: [0, i % 2 === 0 ? 20 : -20, 0],
-              rotate: [0, 90, 180, 270, 360],
-            }}
-            transition={{
-              duration: 10 + i * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Enhanced Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16 md:mb-20"
-        >
-          {/* Animated Badge */}
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", duration: 0.6 }}
-            className="inline-block mb-6"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-sky-600 to-red-600 rounded-full blur-lg opacity-30 animate-pulse" />
-              <div className="relative px-6 py-2.5 bg-white/80 backdrop-blur-sm rounded-full border border-white/50">
-                <div className="flex items-center gap-2">
-                  <motion.div
-                    className="w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
-                    animate={{ scale: [1, 1.4, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <span className="text-sm font-semibold text-sky-700 uppercase tracking-wider">
-                    Disciple-Making Strategies
-                  </span>
-                  <Sparkles className="w-3 h-3 text-red-600" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Main Heading with Gradient */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-          >
-            <span className="bg-gradient-to-r from-sky-600 via-sky-700 to-sky-600 bg-clip-text text-transparent">
-              Discipleship
-            </span>
-            {" "}
-            <span className="bg-gradient-to-r from-red-500  to-red-600 bg-clip-text text-transparent">
-              Strategies
-            </span>
-          </motion.h2>
-
-          {/* Animated Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-sky-700/80 max-w-3xl mx-auto leading-relaxed"
-          >
-            We are committed to raising deeply rooted followers of Christ through
-            intentional, Spirit-led discipleship that transforms lives and campuses.
-          </motion.p>
-
-          {/* Decorative Line */}
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "120px" }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 1 }}
-            className="h-1 bg-gradient-to-r from-sky-500 to-red-600 rounded-full mx-auto mt-8"
-          />
-        </motion.div>
-
-        {/* Enhanced Strategies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {strategies.map((strategy, index) => {
             const colorClasses = getColorClass(strategy.color, "text");

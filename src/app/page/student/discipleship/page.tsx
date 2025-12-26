@@ -6,9 +6,9 @@ export default function Discipleship() {
   return (
     <>
       <PageBanner 
-        title="What We Believe"
-        subtitle="Our foundational Christian convictions"
-        image="/images/bg3.JPG"
+        title="Discipleship & Leadership Strategies"
+        subtitle="We are committed to raising deeply rooted followers of Christ through intentional, Spirit-led discipleship that transforms lives and campuses."
+        image="/images/bg2.JPG"
       />
 
       <DiscipleshipMinistry />      
