@@ -1,5 +1,7 @@
 import PageBanner from "@/src/components/ui/PageBanner";
 import CoreValuesSection from "@/src/components/about/CoreValueSection";
+import CTA from "@/src/components/landing/CTA";
+
 export default function WhoWeArePage() {
   return (
     <>
@@ -10,6 +12,7 @@ export default function WhoWeArePage() {
       />
 
       <CoreValuesSection />
+      <CTA />
     </>
   );
 }

@@ -1,4 +1,5 @@
 
+import CTA from "@/src/components/landing/CTA";
 import DiscipleshipMinistry from "@/src/components/student/discipleship/DiscipleshipMinistry";
 import PageBanner from "@/src/components/ui/PageBanner";
 
@@ -11,7 +12,8 @@ export default function Discipleship() {
         image="/images/bg2.JPG"
       />
 
-      <DiscipleshipMinistry />      
+      <DiscipleshipMinistry />  
+      <CTA />    
     </>
   );
 }

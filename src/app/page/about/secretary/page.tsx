@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import PageBanner from '@/src/components/ui/PageBanner';
+import CTA from '@/src/components/landing/CTA';
 
 export default function GeneralSecretaryPage() {
   return (
@@ -114,6 +115,8 @@ export default function GeneralSecretaryPage() {
           </article>
         </div>
       </div>
+      <CTA />
     </section>
+    
   );
 }

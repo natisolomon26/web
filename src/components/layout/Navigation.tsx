@@ -174,7 +174,7 @@ export default function Navigation() {
             </li>
 
             <li>
-              <Link href="/contact" className={topLinkClass}>
+              <Link href="/page/contact" className={topLinkClass}>
                 Contact
               </Link>
             </li>
@@ -185,7 +185,6 @@ export default function Navigation() {
             href="/give"
             className="
               relative
-              rounded-lg
               bg-gradient-to-r from-red-600 to-red-700
               px-6 py-2.5
               text-sm font-semibold text-white

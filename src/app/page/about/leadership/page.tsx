@@ -1,6 +1,7 @@
 import ExecutiveGrid from "@/src/components/about/leadership/ExcutiveGrid";
 import BoardOfTrustees from "@/src/components/about/leadership/BoardOfTrust";
 import PageBanner from "@/src/components/ui/PageBanner";
+import CTA from "@/src/components/landing/CTA";
 
 export default function LeadershipPage() {
   return (
@@ -13,6 +14,7 @@ export default function LeadershipPage() {
     
       <ExecutiveGrid />
       <BoardOfTrustees />
+      <CTA />
     </>
   );
 }

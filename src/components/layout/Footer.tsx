@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
 
   return (
     <motion.footer 
-      className="relative bg-gradient-to-b from-sky-950 via-sky-900 to-sky-950 text-gray-200 overflow-hidden"
+      className="relative bg-white text-gray-200 overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -33,33 +33,6 @@ export const Footer: React.FC = () => {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Gradient orbs */}
-        <motion.div 
-          className="absolute -top-20 -left-20 w-80 h-80 bg-gradient-to-br from-yellow-500/50 via-transparent to-transparent rounded-full blur-3xl"
-          animate={{
-            y: [0, 40, 0],
-            x: [0, 20, 0],
-            rotate: [0, 180, 360]
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        <motion.div 
-          className="absolute -bottom-20 -right-20 w-96 h-96 bg-gradient-to-tr from-emerald-500/10 via-transparent to-transparent rounded-full blur-3xl"
-          animate={{
-            y: [0, -40, 0],
-            x: [0, -20, 0],
-            rotate: [360, 180, 0]
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
 
         {/* Grid pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -69,7 +42,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-15">
         {/* Top Section */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           {/* Brand Column */}
@@ -82,18 +55,18 @@ export const Footer: React.FC = () => {
           >
             <div className="flex items-center gap-4">
               
-                <div className="relative flex items-center justify-center rounded-2xl  shadow-xl backdrop-blur">
+                <div className="relative flex items-center justify-center">
         <Image
           src="/images.png" // update path if needed
           alt="EvaSUE Logo"
-          width={126}
+          width={136}
           height={76}
           className="object-contain"
           priority
         />
       </div>
             </div>
-            <p className="text-slate-400 leading-relaxed">
+            <p className="text-slate-600 leading-relaxed">
               Advancing The Kingdom Of God By Serving Students
             </p>        
           </motion.div>
@@ -125,7 +98,7 @@ export const Footer: React.FC = () => {
                   >
                     <Link 
                       href={link.href} 
-                      className="flex items-center gap-3 text-slate-400 hover:text-sky-400 transition-colors duration-300 group"
+                      className="flex items-center gap-3 text-slate-700 hover:text-sky-400 transition-colors duration-300 group"
                     >
                       <motion.div
                         animate={{ 
@@ -168,7 +141,7 @@ export const Footer: React.FC = () => {
                 >
                   <Link 
                     href={link.href} 
-                    className={`flex items-center gap-2 text-slate-400 transition-colors duration-300 group`}
+                    className={`flex items-center gap-2 text-slate-700 transition-colors duration-300 group`}
                   >
                     <div className={`w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                     <span className="flex-1">{link.label}</span>
@@ -187,7 +160,7 @@ export const Footer: React.FC = () => {
             className="space-y-6"
           >
            
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-700 text-sm">
               Subscribe to our newsletter for updates, events, and spiritual insights.
             </p>
             
@@ -222,7 +195,7 @@ export const Footer: React.FC = () => {
                       placeholder="Your email address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none transition-all duration-300 placeholder-slate-500"
+                      className="w-full pl-12 pr-4 py-3 bg-white/5 backdrop-blur-sm border border-sky-600/20 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 outline-none transition-all duration-300 placeholder-slate-500"
                       required
                     />
                   </div>
@@ -230,7 +203,7 @@ export const Footer: React.FC = () => {
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full group relative overflow-hidden bg-gradient-to-r from-red-500 to-red-600 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full group relative overflow-hidden bg-gradient-to-r from-red-500 to-red-600 text-white py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
                       Subscribe
@@ -249,7 +222,7 @@ export const Footer: React.FC = () => {
           </motion.div>
         </div>
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-2">
+        <div className="border-t border-red/10 pt-2">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             {/* Copyright */}
             <motion.div

@@ -1,3 +1,4 @@
+import CTA from "@/src/components/landing/CTA";
 import Evangelism from "@/src/components/student/evangelism/LeadershipMinistry";
 import PageBanner from "@/src/components/ui/PageBanner";
 
@@ -10,6 +11,7 @@ export default function LeadershipPage() {
         image="/images/bg4.JPG"
       />
       <Evangelism />
+      <CTA />
     </>
   );
 }

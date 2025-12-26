@@ -1,5 +1,6 @@
 import PageBanner from "@/src/components/ui/PageBanner";
 import BeliefsSection from "@/src/components/about/BeliefsSection";
+import CTA from "@/src/components/landing/CTA";
 
 export default function BelievePage() {
   return (
@@ -11,6 +12,7 @@ export default function BelievePage() {
       />
 
       <BeliefsSection />
+      <CTA />
     </>
   );
 }

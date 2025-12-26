@@ -1,5 +1,6 @@
 import PageBanner from "@/src/components/ui/PageBanner";
 import WhoWeAreSection from "@/src/components/about/WhoWeAreSection";
+import CTA from "@/src/components/landing/CTA";
 
 export default function WhoWeArePage() {
   return (
@@ -11,6 +12,7 @@ export default function WhoWeArePage() {
       />
 
       <WhoWeAreSection />
+      <CTA />
     </>
   );
 }
